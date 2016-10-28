@@ -34,10 +34,12 @@ public class Main {
 		Player p1 = new Player();
 		Player p2 = new Player();
 
-		String poker = in.readLine();
-		byte value;
-		int vitoriasP1 = 0;
+		// VARIAVEIS QUE SERÃO UTILIZADAS NO PROGRAMA
+		String poker = in.readLine();	// CADA LINHA DO ARQUIVO
+		byte value;						// VALOR PARA NUMERO DA CARTA
+		int vitoriasP1 = 0;				// QUANTIDADE DE VITÓRIA DO PLAYER 1
 
+		// EXECUÇÃO DO PROGRAMA
 		do {
 			for (byte i = 0; i < poker.length(); i++) {
 				// INSERÇÃO DAS CARTAS DO PRIMEIRO JOGADOR
@@ -72,6 +74,9 @@ public class Main {
 			
 		} while (poker != null);
 		
+		// ESCRITA NO ARQUIVO
+		// QUANTIDADE DE VITORIA DO PLAYER
+		// TEMPO DE EXECUÇÃO DO PROGRAMA
 		out.println(vitoriasP1);
 		out.print(System.currentTimeMillis() - tempoInicial);
 		out.close();
@@ -138,23 +143,23 @@ public class Main {
 	}
 
 	// IMPRESSÃO DAS INFORMAÇÕES DOS JOGADORES
-	public static void printJogadores(Player p1, Player p2, PrintWriter out) {
+	public static void printJogadores(Player p1, Player p2) {
 		// JOGADOR 1
-		out.print("Mão Player 1: " + p1.mao.toString() + "\nCartas: ");
+		System.out.print("Mão Player 1: " + p1.mao.toString() + "\nCartas: ");
 		for (Carta card : p1.carta) {
-			out.print(card.getValor() + "" + card.getNaipe() + " ");
+			System.out.print(card.getValor() + "" + card.getNaipe() + " ");
 		}
-		out.println("\nCarta Ranking: " + p1.getCartaRanking());
-		out.println("Carta Alta: " + p1.getCartaAlta());
-		out.println();
+		System.out.println("\nCarta Ranking: " + p1.getCartaRanking());
+		System.out.println("Carta Alta: " + p1.getCartaAlta());
+		System.out.println();
 
 		// JOGADOR 2
-		out.print("Mão Player 2: " + p2.mao.toString() + "\nCartas: ");
+		System.out.print("Mão Player 2: " + p2.mao.toString() + "\nCartas: ");
 		for (Carta card : p2.carta) {
-			out.print(card.getValor() + "" + card.getNaipe() + " ");
+			System.out.print(card.getValor() + "" + card.getNaipe() + " ");
 		}
-		out.println("\nCarta Ranking: " + p2.getCartaRanking());
-		out.println("Carta Alta: " + p2.getCartaAlta());
-		out.println();
+		System.out.println("\nCarta Ranking: " + p2.getCartaRanking());
+		System.out.println("Carta Alta: " + p2.getCartaAlta());
+		System.out.println();
 	}
 }
