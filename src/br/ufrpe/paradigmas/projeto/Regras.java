@@ -5,7 +5,7 @@ package br.ufrpe.paradigmas.projeto;
 public class Regras {
 
 	private boolean verifica;
-	private static byte v;
+	private static byte valor;
 	private char naipe;
 	private boolean par = false;
 	private boolean doisPares = false;
@@ -33,11 +33,11 @@ public class Regras {
 
 	// VERIFICA SE EXISTE UMA SEQUÊNCIA
 	public boolean verificaSequencia(Player player) {
-		v = player.carta.get(0).getValor(); // PEGA O 1º VALOR
+		valor = player.carta.get(0).getValor(); // PEGA O 1º VALOR
 		for (byte i = 1; i < 5; i++) {
 			// COMPARA COM O VALOR SEGUINTE A SOMA DE 1
-			if ((v + 1) == player.carta.get(i).getValor()) // CASO SEQUENCIE
-				v = player.carta.get(i).getValor(); // SETA VALOR A v
+			if ((valor + 1) == player.carta.get(i).getValor()) // CASO SEQUENCIE
+				valor = player.carta.get(i).getValor(); // SETA VALOR A v
 			else
 				return false; // CASO NÃO, RETURN FALSE
 		}
@@ -56,7 +56,7 @@ public class Regras {
 		/**
 		 * PAR * DOIS PARES * TRINCA * QUADRA * FULLHOUSE
 		 */
-		v = player.carta.get(0).getValor(); // RECEBE A PRIMEIRA CARTA
+		valor = player.carta.get(0).getValor(); // RECEBE A PRIMEIRA CARTA
 		byte b = 0;
 
 		for (byte i = 1; i < 5;) {
@@ -66,7 +66,7 @@ public class Regras {
 			/**
 			 * PAR
 			 */
-			if (v == player.carta.get(i).getValor()) {
+			if (valor == player.carta.get(i).getValor()) {
 				// SE V IGUAL A CARTA SEGUINTE TEREMOS DUAS CARTAS IGUAIS
 				par = true;
 				a += 1;
@@ -76,16 +76,16 @@ public class Regras {
 				 */
 				// SE CARTA RANKING FOR 0 É PORQUE NÃO TEMOS NENHUM RANKING
 				if (player.getCartaRanking() == 0)
-					player.setCartaRanking(v);
+					player.setCartaRanking(valor);
 				else {
 					// COLOCA O VALOR DO PAR ANTERIOR NA CARTA RANKIN
 					player.setCartaAlta(player.getCartaRanking());
 
 					// SE NÃO FOR 0, SETAMOS COM O NOVO VALOR DE v
-					player.setCartaRanking(v);
+					player.setCartaRanking(valor);
 
 					for (Carta card : player.carta) {
-						if (v != card.getValor() && card.getValor() != player.getCartaAlta())
+						if (valor != card.getValor() && card.getValor() != player.getCartaAlta())
 							player.setKicker(card.getValor());
 					}
 
@@ -98,7 +98,7 @@ public class Regras {
 				 * TRINCA
 				 */
 				// PODEMOS TER UMA TRINCA OU UM FULLHOUSE
-				if (i < 4 && v == player.carta.get(i + 1).getValor()) {
+				if (i < 4 && valor == player.carta.get(i + 1).getValor()) {
 					/**
 					 * DOIS PARES FOR TRUE SIGNIFICA QUE A TRINCA É DO SEGUNDO
 					 * PAR COM ISSO, TEMOS UM PAR E UMA TRINCA (FULLHOUSE)
@@ -108,16 +108,16 @@ public class Regras {
 						// SETANDO CARTA ALTA COM O VALOR DO PAR
 						// E CARTA RANKING COM O VALOR DA TRINCA
 						player.setCartaAlta(player.getCartaRanking());
-						player.setCartaRanking(v);
+						player.setCartaRanking(valor);
 
 					} else {
 						// SETA CARTA RANKING COM O VALOR DA TRINCA
-						player.setCartaRanking(v);
+						player.setCartaRanking(valor);
 						trinca = true;
 
 						// VERIFICA A MAIOR CARTA DIFERENTE DA TRINCA
 						for (byte index = 4; index >= 0; index--) {
-							if (v != player.carta.get(index).getValor()) {
+							if (valor != player.carta.get(index).getValor()) {
 								player.setCartaAlta(player.carta.get(index).getValor());
 								index = -1;
 							}
@@ -133,15 +133,15 @@ public class Regras {
 					 * QUADRA
 					 */
 					// PODEMOS TER UMA QUADRA
-					if (i < 3 && !fullhouse && v == player.carta.get(i + 2).getValor()) {
+					if (i < 3 && !fullhouse && valor == player.carta.get(i + 2).getValor()) {
 						// VERIFICAÇÃO DA CARTA QUE É DIFERENTE NA QUADRA
 						for (Carta card : player.carta) {
-							if (v != card.getValor())
+							if (valor != card.getValor())
 								player.setCartaAlta(card.getValor());
 						}
 
 						// CARTA RANKING COM VALOR DA QUADRA
-						player.setCartaRanking(v);
+						player.setCartaRanking(valor);
 						quadra = true;
 
 						// TRINCA RECEBE FALSE, POIS UMA QUADRA TEM VALOR MAIOR
@@ -170,7 +170,7 @@ public class Regras {
 			b += a;
 			if (b < 4)
 				// PROXIMA POSIÇÃO DE V RELATIVO AO VALOR QUE TEMOS DE a
-				v = player.carta.get(b).getValor();
+				valor = player.carta.get(b).getValor();
 			// BREAK COMO UMA CONDIÇÃO DE PARADA DO LAÇO
 			else
 				break;
