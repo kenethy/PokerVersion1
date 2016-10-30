@@ -27,8 +27,8 @@ public class Main {
 		long tempoInicial = System.currentTimeMillis();
 
 		// CRIAÇÃO DOS ARQUIVOS DE LEITURA E ESCRITA
-		in = new BufferedReader(new FileReader("ArquivosEntrada/pokerK.txt"));
-		out = new PrintWriter(new FileWriter("ArquivosEntrada/pokerK_out.txt"));
+		in = new BufferedReader(new FileReader("ArquivosEntrada/pokerM.txt"));
+		out = new PrintWriter(new FileWriter("ArquivosEntrada/pokerM_out.txt"));
 
 		// JOGADORES
 		Player p1 = new Player();
